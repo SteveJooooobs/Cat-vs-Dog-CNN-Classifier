@@ -10,7 +10,7 @@
 - 训练过程可复现，代码结构清晰
 
 ## 项目结构
-\```
+```
 CNN_cat_vs_dog/
 ├── data(需自行创建数据源存储的目录)/
 │   
@@ -20,7 +20,7 @@ CNN_cat_vs_dog/
 │   └── test/test.py             # 测试脚本
 ├── requirements.txt
 └── README.md
-\```
+```
 
 ## 环境依赖
 - Python 3.10+
@@ -29,15 +29,15 @@ CNN_cat_vs_dog/
 - PIL (Pillow)
 
 安装依赖：
-\```bash
+```bash
 pip install -r requirements.txt
-\```
+```
 
 ## 数据准备
 1. 从 [魔塔社区](https://www.modelscope.cn/datasets/XCsunny/cat_vs_dog_class) 下载 Dogs vs Cats 数据集
 2. 解压后将数据文件夹放入 `data/raw/` 目录
 3. 按猫/狗分好子文件夹：
-\```
+```
 data/raw/
 ├── train/
 │   ├── cat/
@@ -48,21 +48,21 @@ data/raw/
 └── test/
     ├── cat/
     └── dog/
-\```
+```
 
 ## 训练
-\```bash
+```bash
 cd src
 python train_script.py
-\```
+```
 
 训练完成后，最佳模型保存在 `src/models/best_catdog_model.pth`。
 
 ## 测试
-\```bash
+```bash
 cd src/test
 python test.py
-\```
+```
 
 ## 最终结果
 | 指标 | 数值 |
@@ -79,7 +79,7 @@ python test.py
 
 
 ## 作者
-[Mjolnir / GitHub ]
+[Mjolnir / GitHub:SteveJooooobs]
 
-### 协作者
-[DeepSeek--网页端]
+### 致谢
+- 本项目调优过程得到 [DeepSeek](https://chat.deepseek.com/) 的全程技术支持
