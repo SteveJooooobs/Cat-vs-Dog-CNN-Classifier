@@ -50,10 +50,10 @@ class CatVsDog_CNNModuleSet(nn.Module):
         self.classifier = nn.Sequential(
             nn.Linear(256*7*7, 256),            
             nn.ReLU(),
-            # 【参数调优 1】关闭 Dropout（设为 0.0）：
+            # 【参数调优 1】压制 Dropout（设为 0.1）：
             # 实验表明，在从头训练的浅层网络中，BatchNorm 和 Dropout 双重强正则会产生联合过度抑制，
             # 大幅拉低了浅层网络在开始阶段提取基础几何特征的效率，导致 Loss 在 0.693 停滞。将其设为 0.0 以释放模型拟合力。
-            nn.Dropout(0.0),
+            nn.Dropout(0.1),
             nn.Linear(256, 2)
         )
 
@@ -93,9 +93,9 @@ if __name__ == "__main__":
 
     # 【参数调优 2】初始学习率下调至 0.0005：
     # 相比 0.0025，下调至 0.0005 能够极大程度地防范自适应优化器 Adam 在训练刚启动的几个 Batch 里由于梯度累加破坏模型初始权重。
-    # 结合每 15 轮衰减至 0.75 的 StepLR，能够保证高吞吐状态下收敛过程的温和与极高稳定性。
+    # 结合每 25 轮衰减至 0.85 的 StepLR，能够保证高吞吐状态下收敛过程的温和与极高稳定性。
     optimizer = optim.Adam(model.parameters(), lr=0.0005)    # 优化器Adam
-    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=15, gamma=0.75)    # 学习率调度器
+    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=25, gamma=0.85)    # 学习率调度器
 
     # 【参数调优 3】关闭 AMP 混合精度训练：
     # 实验证实，在缺少预训练权重、结构较浅的手写 CNN 模型中，半精度 (FP16) 的范围压缩容易造成梯度下溢或自适应动量不稳定，
@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     print("模型构造完成-损失函数构造完成-优化器构造完成-训练中.....")
 
-    epoch = 60      #训练总轮次
+    epoch = 80      # 训练总轮次--多样本下增加训练轮次提高泛化能力
     best_acc = 0.0  # 在训练循环前初始化
 
     for i in range(epoch):
@@ -189,7 +189,7 @@ if __name__ == "__main__":
 
         if val_accuracy > best_acc:
             best_acc = val_accuracy
-            torch.save(model.state_dict(), 'models/best_catdog_model-v2.pth')
+            torch.save(model.state_dict(), 'models/best_catdog_model-v3.pth')
             print(f"  >>> 新最佳模型已保存，准确率: {best_acc:.4f}")
 
         print(f"当前epoch:{i+1}/{epoch}\n",

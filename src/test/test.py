@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    model_dir = os.path.join(BASE_DIR, 'models','best_catdog_model.pth')
+    model_dir = os.path.join(BASE_DIR, 'models','best_catdog_model-v3.pth')
     model = CatVsDog_CNNModuleSet().to(device)
     model.load_state_dict(torch.load(model_dir))
 
