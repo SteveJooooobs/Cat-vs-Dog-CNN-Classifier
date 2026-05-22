@@ -3,7 +3,9 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.append(BASE_DIR)
 
-from src.data import get_test_loader
+# 使用旧版缩减数据集测试：from src.data import get_test_loader
+# 使用新版完整数据集测试：
+from src.data import get_test_loader_v2 as get_test_loader
 from src.train_script import CatVsDog_CNNModuleSet
 import torch.nn as nn
 import torch
