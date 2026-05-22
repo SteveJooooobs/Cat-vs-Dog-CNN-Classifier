@@ -1,8 +1,14 @@
 .venv/
 .vscode/
 __pycache__/
+
 data/
+!/src/data/
+
 *.pth
 *.pt
+
 CLAUDE.md
 guide.md
+
+train_warnings.log
