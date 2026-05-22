@@ -57,7 +57,8 @@ pip install -r requirements.txt
 ```
 
 ## 数据准备
-0. 在kaggle下载的数据如果是只做猫狗分开，不分训练集等，直接解压到row_complate中即可
+0. 在kaggle下载的数据如果是只做猫狗分开，不分训练集等，直接解压到row_complate中即可，不需要看下述1,2,3
+
 1. 从 [魔塔社区](https://www.modelscope.cn/datasets/XCsunny/cat_vs_dog_class) 下载 Dogs vs Cats 数据集
 2. 解压后将数据文件夹放入 `data/raw/` 目录（缩减版）或 `data/raw_complate/` 目录（完整版）
 3. 按猫/狗分好子文件夹：
